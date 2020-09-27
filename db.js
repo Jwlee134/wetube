@@ -1,38 +1,18 @@
-export const videos = [
-  {
-    id: 11111,
-    title: `Video awesome`,
-    description: `This is something I love`,
-    views: 22222,
-    videoFile: "http://media.w3.org/2010/05/sintel/trailer.mp4",
-    creator: {
-      id: 121212,
-      name: `Jaewon`,
-      email: `sorhd134@gmail.com`,
-    },
-  },
-  {
-    id: 81819,
-    title: `Video perfect`,
-    description: `This is something I love`,
-    views: 22222,
-    videoFile: "http://media.w3.org/2010/05/sintel/trailer.mp4",
-    creator: {
-      id: 121212,
-      name: `Jaewon`,
-      email: `sorhd134@gmail.com`,
-    },
-  },
-  {
-    id: 11615,
-    title: `Video super`,
-    description: `This is something I love`,
-    views: 22222,
-    videoFile: "http://media.w3.org/2010/05/sintel/trailer.mp4",
-    creator: {
-      id: 121212,
-      name: `Jaewon`,
-      email: `sorhd134@gmail.com`,
-    },
-  },
-];
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("✅ Connected to DB");
+const handleError = (error) =>
+  console.log(`❌ Error on DB Connection:${error}`);
+
+db.once("open", handleOpen);
+db.on("error", handleError);
