@@ -1,9 +1,11 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
 import FacebookStrategy from "passport-facebook";
+import KakaoStrategy from "passport-kakao";
 import {
   facebookLoginCallback,
   githubLoginCallback,
+  kakaoLoginCallback,
 } from "./controllers/userController";
 import User from "./models/User";
 import routes from "./routes";
@@ -32,5 +34,23 @@ passport.use(
   )
 );
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(
+  new KakaoStrategy(
+    {
+      clientID: process.env.KAKAO_ID,
+      clientSecret: process.env.KAKAO_SECRET,
+      callbackURL: `http://localhost:4000${routes.kakaoCallback}`,
+    },
+    kakaoLoginCallback
+  )
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});

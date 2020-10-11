@@ -81,6 +81,37 @@ export const postFacebookLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
+export const kakaoLogin = passport.authenticate("kakao");
+
+export const kakaoLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: {
+      id,
+      properties: { nickname },
+      kakao_account: { email },
+    },
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      (user.name = nickname), (user.kakaoId = id), user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      name: nickname,
+      email: email,
+      id: id,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+
+export const postkakaoLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
@@ -116,7 +147,7 @@ export const postEditProfile = async (req, res) => {
       email,
       avatarUrl: file ? file.path : req.user.avatarUrl,
     });
-    res.redirect(routes.me);
+    res.redirect(routes.userDetail(req.user.id));
   } catch (error) {
     console.log(error);
     res.redirect(routes.editProfile);
