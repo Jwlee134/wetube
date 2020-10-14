@@ -66,29 +66,16 @@ export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const facebookLogin = passport.authenticate("facebook");
-
-export const facebookLoginCallback = (
-  accessToken,
-  refreshToken,
-  profile,
-  cb
-) => {
-  console.log(accessToken, refreshToken, profile, cb);
-};
-
-export const postFacebookLogin = (req, res) => {
-  res.redirect(routes.home);
-};
-
 export const kakaoLogin = passport.authenticate("kakao");
 
 export const kakaoLoginCallback = async (_, __, profile, cb) => {
   const {
     _json: {
       id,
-      properties: { nickname },
-      kakao_account: { email },
+      kakao_account: {
+        email,
+        profile: { nickname, profile_image_url },
+      },
     },
   } = profile;
   try {
@@ -100,7 +87,8 @@ export const kakaoLoginCallback = async (_, __, profile, cb) => {
     const newUser = await User.create({
       name: nickname,
       email: email,
-      id: id,
+      kakaoId: id,
+      avatarUrl: profile_image_url,
     });
     return cb(null, newUser);
   } catch (error) {
@@ -145,7 +133,7 @@ export const postEditProfile = async (req, res) => {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl,
+      avatarUrl: file ? `/${file.path}` : req.user.avatarUrl,
     });
     res.redirect(routes.userDetail(req.user.id));
   } catch (error) {

@@ -19,14 +19,14 @@
   }
   .social-login__github {
     background-color: $black;
-    color: white;
-  }
-  .social-login__facebook {
-    background-color: #3a5998;
-    color: white;
+    a {
+      color: white;
+    }
   }
   .social-login__kakao {
     background-color: #ffe812;
-    color: $black;
+    a {
+      color: $black;
+    }
   }
 }

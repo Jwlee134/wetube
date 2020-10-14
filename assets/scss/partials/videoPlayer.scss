@@ -1,12 +1,13 @@
 .videoPlayer {
   position: relative;
+  width: 600px;
   &:hover {
     .videoPlayer__controls {
       opacity: 1;
     }
   }
   video {
-    width: 600px;
+    width: 100%;
     max-width: 100%;
   }
   .videoPlayer__controls {

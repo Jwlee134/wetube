@@ -1,9 +1,7 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import FacebookStrategy from "passport-facebook";
 import KakaoStrategy from "passport-kakao";
 import {
-  facebookLoginCallback,
   githubLoginCallback,
   kakaoLoginCallback,
 } from "./controllers/userController";
@@ -22,18 +20,6 @@ passport.use(
     githubLoginCallback
   )
 );
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FB_ID,
-      clientSecret: process.env.FB_SECRET,
-      callbackURL: `https://thin-elephant-57.loca.lt/${routes.facebookCallback}`,
-    },
-    facebookLoginCallback
-  )
-);
-
 passport.use(
   new KakaoStrategy(
     {
