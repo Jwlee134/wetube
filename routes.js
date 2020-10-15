@@ -12,7 +12,6 @@ const USERS = "/users";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
-const ME = "/me";
 
 //Videos
 const VIDEOS = "/videos";
@@ -33,6 +32,7 @@ const KAKAO_CALLBACK = "/oauth";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/deleteComment";
 
 const routes = {
   home: HOME,
@@ -50,7 +50,6 @@ const routes = {
   },
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
-  me: ME,
   videos: VIDEOS,
   upload: UPLOAD,
   videoDetail: (id) => {
@@ -81,6 +80,7 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
+  deleteComment: DELETE_COMMENT,
 };
 
 export default routes;

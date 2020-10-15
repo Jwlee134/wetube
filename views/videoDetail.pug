@@ -30,12 +30,18 @@ block content
                     span#jsCommentNumber=video.comments.length 
                     |   comments
             form.add__comment#jsAddComment
-                input(type="text", placeholder="Add a comment")
+                if loggedUser
+                    input(type="text", placeholder="Add a comment")
+                else
+                    span Please Join or Log In to add a comment.
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
                     li
-                        span=comment.text
-                        a.creator(href=routes.userDetail(comment.creator.id))=comment.creator.name
-                        img.u-avatar(src=comment.creator.avatarUrl)
-                        if loggedUser && comment.creator.id === loggedUser.id
-                            button ×
+                        .comment__column
+                            img.u-avatar(src=comment.creator.avatarUrl)
+                            a.creator(href=routes.userDetail(comment.creator.id))=comment.creator.name
+                        .comment__column
+                            span=comment.text
+                            if loggedUser && comment.creator.id === loggedUser.id
+                                button(id=comment.id class="deleteComment") ×
+                        

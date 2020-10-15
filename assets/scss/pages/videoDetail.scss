@@ -48,42 +48,50 @@
     .video__comments-list {
       margin-top: 50px;
       li {
-        max-width: 320px;
-        background-color: #3498db;
-        color: white;
-        padding: 15px;
-        border-radius: 20px;
-        border-bottom-left-radius: 0px;
-        position: relative;
-        &:not(:last-child) {
+        display: flex;
+        .comment__column:first-child {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          margin-right: 10px;
+          margin-bottom: 20px;
+          .creator {
+            color: $black;
+            font-size: 12px;
+          }
+          .u-avatar {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+          }
+        }
+        .comment__column:last-child {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+            0 1px 2px rgba(0, 0, 0, 0.24);
+          max-width: 320px;
+          background-color: #3498db;
+          color: white;
+          padding: 15px 25px;
+          border-radius: 35px;
+          border-bottom-left-radius: 0px;
+          border-top-right-radius: 20px;
+          position: relative;
           margin-bottom: 25px;
-        }
-        .creator {
-          color: $black;
-          position: absolute;
-          left: -51px;
-          bottom: -10px;
-          font-size: 12px;
-        }
-        .u-avatar {
-          position: absolute;
-          left: -52px;
-          width: 40px;
-          height: 40px;
-          bottom: 8px;
-        }
-        button {
-          position: absolute;
-          border-radius: 50%;
-          width: 15px;
-          height: 15px;
-          padding: 5px 5px;
-          right: -15px;
-          top: -10px;
-          font-size: 12px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          button {
+            position: absolute;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            padding: 5px 5px;
+            right: -15px;
+            top: -10px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
     }

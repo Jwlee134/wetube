@@ -1,6 +1,7 @@
 import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
+import { comment } from "postcss";
 
 export const home = async (req, res) => {
   try {
@@ -119,10 +120,8 @@ export const postRegisterView = async (req, res) => {
     video.views += 1;
     video.save();
     res.status(200);
-    res.status;
   } catch (error) {
     res.status(400);
-    res.end();
   } finally {
     res.end();
   }
@@ -140,9 +139,30 @@ export const postAddComment = async (req, res) => {
       text: comment,
       creator: user.id,
     });
-    console.log(newComment);
     video.comments.push(newComment.id);
     video.save();
+    const commentInfo = await Comment.findById(newComment.id).populate(
+      "creator"
+    );
+    res.json(commentInfo);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDeleteComment = async (req, res) => {
+  const {
+    body: { commentId },
+  } = req;
+  try {
+    const comment = await Comment.findById(commentId);
+    if (req.user.id == comment.creator) {
+      await Comment.findByIdAndRemove({ _id: commentId });
+    } else {
+      throw Error();
+    }
   } catch (error) {
     res.status(400);
   } finally {

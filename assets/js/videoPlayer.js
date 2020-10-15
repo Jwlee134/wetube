@@ -39,12 +39,6 @@ const handleVolume = () => {
   }
 };
 
-const handleSpaceBar = (event) => {
-  if (event.keyCode === 32) {
-    handlePlay();
-  }
-};
-
 const setDuration = () => {
   const s = parseInt(video.duration % 60);
   const m = parseInt((video.duration / 60) % 60);
@@ -102,7 +96,6 @@ const init = () => {
   video.volume = 1;
   playBtn.addEventListener("click", handlePlay);
   volumeBtn.addEventListener("click", handleVolume);
-  document.addEventListener("keyup", handleSpaceBar);
   video.addEventListener("loadedmetadata", setDuration);
   video.addEventListener("timeupdate", updateTime);
   video.addEventListener("ended", restartVideo);
