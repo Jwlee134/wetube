@@ -133,7 +133,7 @@ export const postEditProfile = async (req, res) => {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? `/${file.path}` : req.user.avatarUrl,
+      avatarUrl: file ? `${file.location}` : req.user.avatarUrl,
     });
     res.redirect(routes.userDetail(req.user.id));
   } catch (error) {
