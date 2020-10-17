@@ -38,9 +38,7 @@ export const postLogin = passport.authenticate("local", {
   successFlash: "Welcome!",
 });
 
-export const githubLogin = passport.authenticate("github", {
-  successFlash: "Welcome!",
-});
+export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
   const {
@@ -101,7 +99,6 @@ export const kakaoLoginCallback = async (_, __, profile, cb) => {
 };
 
 export const postkakaoLogin = (req, res) => {
-  req.flash("success", "Welcome!");
   res.redirect(routes.home);
 };
 
