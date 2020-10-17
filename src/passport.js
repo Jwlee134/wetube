@@ -17,7 +17,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: process.env.PRODUCTION
+        ? `https://damp-retreat-27481.herokuapp.com/${routes.githubCallback}`
+        : `http://localhost:4000${routes.githubCallback}`,
     },
     githubLoginCallback
   )
@@ -27,7 +29,9 @@ passport.use(
     {
       clientID: process.env.KAKAO_ID,
       clientSecret: process.env.KAKAO_SECRET,
-      callbackURL: `http://localhost:4000${routes.kakaoCallback}`,
+      callbackURL: process.env.PRODUCTION
+        ? `https://damp-retreat-27481.herokuapp.com/${routes.githubCallback}`
+        : `http://localhost:4000${routes.kakaoCallback}`,
     },
     kakaoLoginCallback
   )
