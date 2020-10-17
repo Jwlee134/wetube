@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import passport from "passport";
 import GithubStrategy from "passport-github";
 import KakaoStrategy from "passport-kakao";
