@@ -30,7 +30,7 @@ passport.use(
       clientID: process.env.KAKAO_ID,
       clientSecret: process.env.KAKAO_SECRET,
       callbackURL: process.env.PRODUCTION
-        ? `https://damp-retreat-27481.herokuapp.com/${routes.githubCallback}`
+        ? `https://damp-retreat-27481.herokuapp.com/${routes.kakaoCallback}`
         : `http://localhost:4000${routes.kakaoCallback}`,
     },
     kakaoLoginCallback
