@@ -8,7 +8,6 @@ import {
   logout,
   githubLogin,
   postGithubLogin,
-  getMe,
   kakaoLogin,
   postkakaoLogin,
 } from "../controllers/userController";
@@ -31,14 +30,20 @@ globalRouter.get(routes.logout, onlyPrivate, logout);
 globalRouter.get(routes.github, githubLogin);
 globalRouter.get(
   routes.githubCallback,
-  passport.authenticate("github", { failureRedirect: routes.login }),
+  passport.authenticate("github", {
+    failureRedirect: routes.login,
+    successFlash: "Welcome!",
+  }),
   postGithubLogin
 );
 
 globalRouter.get(routes.kakao, kakaoLogin);
 globalRouter.get(
   routes.kakaoCallback,
-  passport.authenticate("kakao", { failureRedirect: routes.login }),
+  passport.authenticate("kakao", {
+    failureRedirect: routes.login,
+    successFlash: "Welcome!",
+  }),
   postkakaoLogin
 );
 
