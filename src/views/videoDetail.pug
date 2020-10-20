@@ -12,14 +12,18 @@ block content
                 a(href=routes.editVideo(video.id)) 
                     button Edit Video
             h5.video__title=video.title
-            p.video__description=video.description
             if video.views === 1
-                span.video__views 1 view
-            else
-                span.video__views #{video.views} views
-            .video__author
-                |Uploaded by 
-                a(href=routes.userDetail(video.creator.id))=video.creator.name
+                span.video__views 1 view • #{moment(video.createAt).format('YYYY. MM. DD')}
+            else 
+                span.video__views #{video.views} views • #{moment(video.createAt).format('YYYY. MM. DD')}
+            .videoBlock
+                .videoBlock__info
+                    .videoBlock__column
+                        a(href=routes.userDetail(video.creator.id))
+                            img.u-avatar.comment-avatar(src=video.creator.avatarUrl)
+                            .creator=video.creator.name
+                    .videoBlock__column
+                        .video__description=video.description
         .video__comments
             if video.comments.length === 1
                 span.video__comment-number
@@ -38,8 +42,9 @@ block content
                 each comment in video.comments.reverse()
                     li
                         .comment__column
-                            img.u-avatar(src=comment.creator.avatarUrl)
-                            a.creator(href=routes.userDetail(comment.creator.id))=comment.creator.name
+                            a(href=routes.userDetail(comment.creator.id))
+                                img.u-avatar.comment-avatar(src=comment.creator.avatarUrl)
+                                .creator=comment.creator.name
                         .comment__column
                             span=comment.text
                             if loggedUser && comment.creator.id === loggedUser.id

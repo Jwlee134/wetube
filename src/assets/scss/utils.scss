@@ -1,5 +1,15 @@
 .u-avatar {
   width: 80px;
   height: 80px;
+}
+.home-avatar,
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+.u-avatar,
+.home-avatar,
+.comment-avatar {
   border-radius: 50%;
 }

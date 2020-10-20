@@ -13,6 +13,7 @@
       i {
         color: white;
         font-size: 30px;
+        margin-left: 20px;
       }
       &:nth-child(2) {
         width: 100%;
@@ -20,6 +21,7 @@
       }
       &:last-child {
         justify-self: end;
+        margin-right: 20px;
       }
       ul {
         display: flex;

@@ -15,7 +15,7 @@
   .videoPlayer__controls {
     border-radius: 20px;
     transition: opacity 0.2s linear;
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     width: 100%;
     bottom: 0px;
@@ -37,11 +37,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      input {
+      padding-top: 2px;
+      #progress {
         padding: 0;
         box-shadow: none;
-        max-width: 100%;
-        height: 5px;
+        width: 100%;
+        height: 7px;
       }
     }
     .videoPlayer__column:nth-child(3) {
@@ -65,8 +66,8 @@
         transition: opacity 0.2s linear;
         width: 80px;
         transform: rotate(-90deg);
-        bottom: 55px;
-        padding: 0;
+        bottom: 60px;
+        padding: 10px 0px;
         height: 5px;
         margin: 0;
       }

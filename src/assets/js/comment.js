@@ -32,6 +32,7 @@ const addComment = (comment, data) => {
   delBtn.addEventListener("click", handleDelete);
   img.src = data.creator.avatarUrl;
   img.classList.add("u-avatar");
+  img.classList.add("comment-avatar");
   a.innerText = data.creator.name;
   a.href = `/users/${data.creator._id}`;
   a.classList.add("creator");

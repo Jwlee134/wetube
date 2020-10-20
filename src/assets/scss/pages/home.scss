@@ -1,5 +1,11 @@
-.home-videos {
+.home-videos,
+.search__videos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+}
+.userDetail-videos {
+  img {
+    display: none;
+  }
 }

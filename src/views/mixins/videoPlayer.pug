@@ -6,7 +6,7 @@ mixin videoPlayer(video={})
                 span#jsPlayBtn
                     i.fas.fa-play
             .videoPlayer__column
-                input#progress(type="range" value="0" min="0" step="1")
+                progress#progress(value="0", min="0")
             .videoPlayer__column
                 span
                     span#currentTime 0:00
