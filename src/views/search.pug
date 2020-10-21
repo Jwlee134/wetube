@@ -14,5 +14,6 @@ block content
                 views:video.views,
                 videoFile:video.fileUrl,
                 creator:video.creator.name,
-                avatar:video.creator.avatarUrl
+                avatar:video.creator.avatarUrl,
+                date:moment(video.createAt).format('YYYY. MM. DD')
             })
