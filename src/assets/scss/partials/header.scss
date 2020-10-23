@@ -1,19 +1,31 @@
 .header {
-  background-color: $red;
   margin-bottom: 50px;
   .header__wrapper {
-    padding: 5px 0px;
+    padding: 10px 0px;
     width: 100%;
-    max-width: 1000px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
     .header__column {
       i {
-        color: white;
+        color: $red;
         font-size: 30px;
-        margin-left: 20px;
+        margin-left: 40px;
+        margin-right: 5px;
+      }
+      h3 {
+        color: $black;
+        font-weight: 600;
+        font-size: 27px;
+        margin-bottom: 2px;
+      }
+      &:first-child {
+        a {
+          display: flex;
+          align-items: center;
+        }
       }
       &:nth-child(2) {
         width: 100%;
@@ -21,12 +33,12 @@
       }
       &:last-child {
         justify-self: end;
-        margin-right: 20px;
+        margin-right: 40px;
       }
       ul {
         display: flex;
         a {
-          color: white;
+          color: $black;
           font-weight: 600;
           text-transform: uppercase;
         }
@@ -39,11 +51,17 @@
         input {
           width: 100%;
           padding: 7px 10px;
-          border-radius: 5px;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          border-radius: 20px;
           font-size: 14px;
           color: $black;
           font-weight: 600;
           max-width: none;
+          box-shadow: none;
+          transition: box-shadow 0.15s linear;
+          &:hover {
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+          }
           &::placeholder {
             font-weight: 300;
             color: rgba(0, 0, 0, 0.7);

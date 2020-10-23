@@ -1,19 +1,21 @@
 .footer {
-  margin: 50px 0px;
-  padding-top: 50px;
-  border-top: 3px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
   .footer__icon {
-    color: rgba(0, 0, 0, 0.2);
-    font-size: 40px;
     margin-bottom: 20px;
+    a {
+      color: black;
+      opacity: 0.5;
+      font-size: 40px;
+    }
   }
   .footer__text {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.5);
     font-weight: 600;
-    text-transform: uppercase;
   }
 }
