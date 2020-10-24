@@ -15,9 +15,14 @@ header.header
                     li
                         a(href=routes.login) Log In
                 else
-                    li
-                        a(href=`/videos${routes.upload}`) Upload
-                    li
-                        a(href=routes.userDetail(loggedUser.id)) Profile
-                    li
-                        a(href=routes.logout) Log Out
+                    img.header-avatar#avatar(src=loggedUser.avatarUrl)
+                    .header__menu.hide
+                        li#content
+                            a(href=`/videos${routes.upload}`)
+                                span upload
+                        li#content
+                            a(href=routes.userDetail(loggedUser.id)) 
+                                span profile
+                        li#content
+                            a(href=routes.logout) 
+                                span logout
