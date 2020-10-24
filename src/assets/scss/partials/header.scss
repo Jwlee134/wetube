@@ -83,6 +83,9 @@
           &:hover {
             box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
           }
+          &:focus {
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+          }
           &::placeholder {
             font-weight: 300;
             color: rgba(0, 0, 0, 0.7);
