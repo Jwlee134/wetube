@@ -114,6 +114,11 @@ const init = () => {
   video.volume = 1;
   playBtn.addEventListener("click", handlePlay);
   volumeBtn.addEventListener("click", handleVolume);
+  document.addEventListener("readystateChange", (event) => {
+    if (event.target.readyState === "complete") {
+      setDuration();
+    }
+  });
   video.addEventListener("loadedmetadata", setDuration);
   video.addEventListener("loadedmetadata", handleProgressMax);
   video.addEventListener("timeupdate", updateTime);
