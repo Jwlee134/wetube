@@ -1,5 +1,10 @@
 .videoBlock {
-  margin: 10px 10px;
+  margin: 0px 10px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
   a {
     color: black;
   }

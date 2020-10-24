@@ -16,14 +16,13 @@ block content
                 span.video__views 1 view • #{moment(video.createAt).format('YYYY. MM. DD')}
             else 
                 span.video__views #{video.views} views • #{moment(video.createAt).format('YYYY. MM. DD')}
-            .videoBlock
-                .videoBlock__info
-                    .videoBlock__column
-                        a(href=routes.userDetail(video.creator.id))
-                            img.u-avatar.comment-avatar(src=video.creator.avatarUrl)
-                            .creator=video.creator.name
-                    .videoBlock__column
-                        .video__description=video.description
+            .videoBlock__info
+                .videoBlock__column
+                    a(href=routes.userDetail(video.creator.id))
+                        img.u-avatar.comment-avatar(src=video.creator.avatarUrl)
+                        .creator=video.creator.name
+                .videoBlock__column
+                    .video__description=video.description
         .video__comments
             if video.comments.length === 1
                 span.video__comment-number

@@ -27,4 +27,6 @@ const showMenu = () => {
 const init = () => {
   avatar.addEventListener("click", showMenu);
 };
-init();
+if (avatar) {
+  init();
+}
