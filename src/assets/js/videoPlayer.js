@@ -10,6 +10,8 @@ const videoController = document.querySelector(".videoPlayer__controls");
 const fullScrnBtn = document.querySelector("#jsFullScreen");
 const volumeRange = document.getElementById("jsVolume");
 
+let timeout;
+
 const registerView = () => {
   const videoId = window.location.href.split("/videos/")[1];
   fetch(`/api/${videoId}/view`, {
@@ -62,6 +64,7 @@ const restartVideo = () => {
 };
 
 const exitFullScreen = () => {
+  videoController.classList.remove("fullScreen");
   fullScrnBtn.innerHTML = '<i class="fas fa-expand"></i>';
   fullScrnBtn.addEventListener("click", goFullScreen);
   document.webkitExitFullscreen();
@@ -69,6 +72,7 @@ const exitFullScreen = () => {
 
 const goFullScreen = () => {
   videoContainer.webkitRequestFullscreen();
+  videoController.classList.add("fullScreen");
   fullScrnBtn.innerHTML = '<i class="fas fa-compress"></i>';
   fullScrnBtn.removeEventListener("click", goFullScreen);
   fullScrnBtn.addEventListener("click", exitFullScreen);
@@ -110,6 +114,22 @@ const handleProgress = (e) => {
   video.currentTime = clickedValue;
 };
 
+const detectMouseMove = () => {
+  videoContainer.classList.add("showCursor");
+  videoController.classList.add("showBar");
+  videoContainer.classList.remove("hideCursor");
+  videoController.classList.remove("hideBar");
+  clearTimeout(timeout);
+  timeout = setTimeout(hideContents, 2000);
+};
+
+const hideContents = () => {
+  videoContainer.classList.add("hideCursor");
+  videoController.classList.add("hideBar");
+  videoContainer.classList.remove("showCursor");
+  videoController.classList.remove("showBar");
+};
+
 const init = () => {
   video.volume = 1;
   playBtn.addEventListener("click", handlePlay);
@@ -127,6 +147,7 @@ const init = () => {
   fullScrnBtn.addEventListener("click", goFullScreen);
   volumeRange.addEventListener("input", handleDrag);
   progress.addEventListener("click", handleProgress);
+  videoContainer.addEventListener("mousemove", detectMouseMove);
 };
 
 if (videoContainer) {
