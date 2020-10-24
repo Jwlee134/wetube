@@ -1,5 +1,9 @@
 .header {
-  margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 98;
   .header__wrapper {
     padding: 10px 0px;
     width: 100%;
