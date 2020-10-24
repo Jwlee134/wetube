@@ -114,7 +114,7 @@ const init = () => {
   video.volume = 1;
   playBtn.addEventListener("click", handlePlay);
   volumeBtn.addEventListener("click", handleVolume);
-  document.addEventListener("readystateChange", (event) => {
+  document.addEventListener("readystatechange", (event) => {
     if (event.target.readyState === "complete") {
       setDuration();
     }
