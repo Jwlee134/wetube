@@ -12,17 +12,9 @@ const volumeRange = document.getElementById("jsVolume");
 
 let timeout;
 
-const registerView = () => {
-  const videoId = window.location.href.split("/videos/")[1];
-  fetch(`/api/${videoId}/view`, {
-    method: "POST",
-  });
-};
-
 const handlePlay = () => {
   if (video.paused) {
     video.play();
-    registerView();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
     video.pause();
