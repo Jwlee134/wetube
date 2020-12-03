@@ -6,6 +6,7 @@ const commentNumber = document.getElementById("jsCommentNumber");
 const videoId = window.location.href.split("/videos/")[1];
 const delBtns = document.querySelectorAll(".deleteComment");
 const li = document.querySelector("li");
+const noComments = document.querySelector(".noComments");
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
@@ -44,6 +45,8 @@ const addComment = (comment, data) => {
   column2.appendChild(delBtn);
   commentList.prepend(li);
   increaseNumber();
+  commentList = noComments.parentNode;
+  commentList.removeChild(noComments);
 };
 
 const sendComment = async (comment) => {
@@ -54,7 +57,6 @@ const sendComment = async (comment) => {
       comment,
     },
   });
-  console.log(response);
   const { data } = response;
   if (response.status === 200) {
     addComment(comment, data);
@@ -68,6 +70,12 @@ const deleteComment = (event) => {
   commentList = li.parentNode;
   commentList.removeChild(li);
   decreaseNumber();
+  if (commentNumber.innerHTML === "0") {
+    const div = document.createElement("div");
+    div.classList.add("noComments");
+    commentList.appendChild(div);
+    div.innerHTML = "첫 번째 댓글을 달아 보세요.";
+  }
 };
 
 const handleDelete = async (event) => {
@@ -79,7 +87,6 @@ const handleDelete = async (event) => {
     method: "POST",
     data: { commentId },
   });
-  console.log(response);
   if (response.status === 200) {
     deleteComment(event);
   }

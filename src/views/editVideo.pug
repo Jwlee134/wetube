@@ -3,8 +3,8 @@ extends layouts/main.pug
 block content
     .form-container
         form(action=routes.editVideo(video.id), method="post")
-            input(type="text", placeholder="Title", name="title", value=video.title)
-            textarea(name="description", placeholder="Description")=video.description
-            input(type="submit", value="Update Video")
+            input(type="text", placeholder="제목", name="title", value=video.title)
+            textarea(name="description", placeholder="설명")=video.description
+            input(type="submit", value="저장")
         a.form-container__link(href=routes.deleteVideo(video.id))
-            button.delete Delete Video
+            button.delete 동영상 삭제

@@ -1,5 +1,7 @@
 import routes from "../routes";
 import User from "../models/User";
+import Video from "../models/Video";
+import Comment from "../models/Comment";
 import passport from "passport";
 
 export const getJoin = (req, res) => {
@@ -19,6 +21,8 @@ export const postJoin = async (req, res, next) => {
       const newUser = await User({
         name,
         email,
+        avatarUrl:
+          "https://wetubejw.s3.ap-northeast-2.amazonaws.com/avatar/bd15c0e92653e5976a50ed43bd15343f",
       });
       await User.register(newUser, password);
       next();
@@ -165,5 +169,25 @@ export const postChangePassword = async (req, res) => {
     req.flash("error", "Can't change password.");
     res.status(400);
     res.redirect(`/users${routes.changePassword}`);
+  }
+};
+
+export const deleteAccount = async (req, res) => {
+  const { user } = req;
+  try {
+    const nowUser = await User.findById(user.id)
+      .populate("videos")
+      .populate("comments");
+    nowUser.videos.forEach(
+      async (video) => await Video.findByIdAndRemove(video.id)
+    );
+    nowUser.comments.forEach(
+      async (comment) => await Comment.findByIdAndRemove(comment.id)
+    );
+    await User.findByIdAndRemove(user.id);
+    res.redirect(routes.home);
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.editProfile);
   }
 };

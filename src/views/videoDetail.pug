@@ -6,16 +6,13 @@ block content
         .video__player
             +videoPlayer({
                 src:video.fileUrl
-            }  )
+            })
         .video__info
             if loggedUser && video.creator.id === loggedUser.id
                 a(href=routes.editVideo(video.id)) 
-                    button Edit Video
+                    button 동영상 수정
             h5.video__title=video.title
-            if video.views === 1
-                span.video__views 1 view • #{moment(video.createAt).format('YYYY. MM. DD')}
-            else 
-                span.video__views #{video.views} views • #{moment(video.createAt).format('YYYY. MM. DD')}
+            span.video__views 조회수 #{video.views}회 • #{moment(video.createAt).format('YYYY. MM. DD')}
             .videoBlock__info
                 .videoBlock__column
                     a(href=routes.userDetail(video.creator.id))
@@ -23,21 +20,22 @@ block content
                         .creator=video.creator.name
                 .videoBlock__column
                     .video__description=video.description
+            .video__comment-number
+                span 댓글 
+                span#jsCommentNumber=video.comments.length
+                span 개
         .video__comments
-            if video.comments.length === 1
-                span.video__comment-number
-                    span#jsCommentNumber 1  
-                    |   comment
-            else
-                span.video__comment-number
-                    span#jsCommentNumber=video.comments.length 
-                    |   comments
-            form.add__comment#jsAddComment
+            .video__comments__column
                 if loggedUser
-                    input(type="text", placeholder="Add a comment")
-                else
-                    span Please Join or Log In to add a comment.
-            ul.video__comments-list#jsCommentList
+                    img.u-avatar.comment-avatar(src=loggedUser.avatarUrl)
+            .video__comments__column
+                form.add__comment#jsAddComment
+                    if loggedUser
+                        input.video__comment__input(type="text", placeholder="공개 댓글 추가...")
+                    else
+                        span 댓글을 추가하려면 로그인하세요.
+        ul.video__comments-list#jsCommentList
+            if video.comments.length !== 0
                 each comment in video.comments.reverse()
                     li
                         .comment__column
@@ -48,4 +46,5 @@ block content
                             span=comment.text
                             if loggedUser && comment.creator.id === loggedUser.id
                                 button(id=comment.id class="deleteComment") ×
-                        
+            else
+                .noComments 첫 번째 댓글을 달아 보세요.

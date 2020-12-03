@@ -9,15 +9,18 @@ block content
         if loggedUser && user.id === loggedUser.id
             .user-profile__btns
                 a(href=`/users${routes.editProfile}`)
-                    button Edit Profile
+                    button 프로필 수정
                 a(href=`/users${routes.changePassword}`)
-                    button Change Password
-        .home-videos.userDetail-videos
-            each item in user.videos.reverse()
-                +videoBlock({
-                    id:item.id,
-                    title:item.title,
-                    views:item.views,
-                    videoFile:item.fileUrl,
-                    date:moment(item.createAt).format('YYYY. MM. DD')
-                })
+                    button 비밀번호 변경
+        if user.videos.length !== 0
+            .home-videos.userDetail-videos
+                each item in user.videos.reverse()
+                    +videoBlock({
+                        id:item.id,
+                        title:item.title,
+                        views:item.views,
+                        videoFile:item.fileUrl,
+                        date:moment(item.createAt).format('YYYY. MM. DD')
+                    })
+        else
+            span.no-videos 공유한 비디오가 없어요.

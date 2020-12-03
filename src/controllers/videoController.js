@@ -1,4 +1,5 @@
 import routes from "../routes";
+import User from "../models/User";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 
@@ -58,6 +59,8 @@ export const videoDetail = async (req, res) => {
         path: "comments",
         populate: { path: "creator" },
       });
+    video.views += 1;
+    video.save();
     res.render(`videoDetail`, { pageTitle: video.title, video });
   } catch (error) {
     console.log(error);
@@ -98,34 +101,22 @@ export const postEditVideo = async (req, res) => {
 export const deleteVideo = async (req, res) => {
   const {
     params: { id },
+    user,
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator.toString() !== req.user.id) {
+    if (video.creator.toString() !== user.id) {
       throw Error();
     } else {
       await Video.findOneAndRemove({ _id: id });
+      const idx1 = user.videos.findIndex((video) => video.toString() === id);
+      user.videos.splice(idx1, 1);
+      user.save();
     }
   } catch (error) {
     console.log(error);
   }
   res.redirect(routes.home);
-};
-
-export const postRegisterView = async (req, res) => {
-  const {
-    params: { id },
-  } = req;
-  try {
-    const video = await Video.findById(id);
-    video.views += 1;
-    video.save();
-    res.status(200);
-  } catch (error) {
-    res.status(400);
-  } finally {
-    res.end();
-  }
 };
 
 export const postAddComment = async (req, res) => {
@@ -136,12 +127,15 @@ export const postAddComment = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    const nowUser = await User.findById(user.id);
     const newComment = await Comment.create({
       text: comment,
       creator: user.id,
     });
     video.comments.push(newComment.id);
     video.save();
+    nowUser.comments.push(newComment.id);
+    nowUser.save();
     const commentInfo = await Comment.findById(newComment.id).populate(
       "creator"
     );
@@ -156,11 +150,24 @@ export const postAddComment = async (req, res) => {
 export const postDeleteComment = async (req, res) => {
   const {
     body: { commentId },
+    params: { id },
+    user,
   } = req;
   try {
     const comment = await Comment.findById(commentId);
+    const video = await Video.findById(id);
     if (req.user.id == comment.creator) {
       await Comment.findByIdAndRemove({ _id: commentId });
+      const idx1 = video.comments.findIndex(
+        (comment) => comment.toString() === commentId
+      );
+      video.comments.splice(idx1, 1);
+      video.save();
+      const idx2 = user.comments.findIndex(
+        (comment) => comment.toString() === commentId
+      );
+      user.comments.splice(idx2, 1);
+      user.save();
     } else {
       throw Error();
     }

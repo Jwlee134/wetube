@@ -4,11 +4,11 @@ block content
     .form-container
         .record-container#jsRecordContainer
             video#jsVideoPreview
-            button#jsRecordBtn Start Recording
+            button#jsRecordBtn 녹화 시작
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
             .fileUpload
-                label(for="file") Video File
+                label(for="file") 동영상 파일을 선택하세요.
                 input(type="file", id="file", name="videoFile", required=true, accept="video/*")
-            input(type="text", placeholder="Title", name="title", required=true)
-            textarea(name="description", placeholder="Description", required=true)
-            input(type="submit", value="Upload Video")
+            input(type="text", placeholder="제목", name="title", required=true)
+            textarea(name="description", placeholder="설명", required=true)
+            input(type="submit", value="업로드")

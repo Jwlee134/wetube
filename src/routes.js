@@ -1,5 +1,3 @@
-import { deleteVideo } from "./controllers/videoController";
-
 // Global
 const HOME = "/";
 const JOIN = "/join";
@@ -12,6 +10,7 @@ const USERS = "/users";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const DELETE_ACCOUNT = "/delete-account";
 
 //Videos
 const VIDEOS = "/videos";
@@ -30,7 +29,6 @@ const KAKAO_CALLBACK = "/oauth";
 
 //Api
 const API = "/api";
-const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
 const DELETE_COMMENT = "/:id/deleteComment";
 
@@ -49,6 +47,7 @@ const routes = {
     }
   },
   editProfile: EDIT_PROFILE,
+  deleteAccount: DELETE_ACCOUNT,
   changePassword: CHANGE_PASSWORD,
   videos: VIDEOS,
   upload: UPLOAD,
@@ -78,7 +77,6 @@ const routes = {
   kakao: KAKAO,
   kakaoCallback: KAKAO_CALLBACK,
   api: API,
-  registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
   deleteComment: DELETE_COMMENT,
 };

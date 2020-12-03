@@ -6,23 +6,23 @@ header.header
                 h3 WeTube
         .header__column
             form(action=routes.search, method="get")
-                input(type="text", placeholder="Search by term...", name="term")
+                input(type="text", placeholder="검색", name="term")
         .header__column
             ul
                 if !loggedUser
                     li
-                        a(href=routes.join) Join
+                        a(href=routes.join) 가입
                     li
-                        a(href=routes.login) Log In
+                        a(href=routes.login) 로그인
                 else
                     img.header-avatar#avatar(src=loggedUser.avatarUrl)
                     .header__menu.hide
                         li#content
                             a(href=`/videos${routes.upload}`)
-                                span upload
+                                span 업로드
                         li#content
                             a(href=routes.userDetail(loggedUser.id)) 
-                                span profile
+                                span 프로필
                         li#content
                             a(href=routes.logout) 
-                                span logout
+                                span 로그아웃
